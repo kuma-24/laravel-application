@@ -1,0 +1,78 @@
+version: '3.9'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    ports:
+      - target: 80
+        published: ${WEB_PORT}
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: ./application/laravel
+        target: /laravel-application/application/laravel
+      - type: bind
+        source: ./dashboard/laravel
+        target: /laravel-application/dashboard/laravel
+    environment:
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME}
+
+  application:
+    build: 
+      context: .
+      dockerfile: ./application/php/Dockerfile
+    volumes:
+      - type: bind
+        source: ./application/laravel
+        target: /laravel-application/application/laravel
+    environment:
+      - DB_CONNECTION=${DB_CONNECTION}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_NAME}
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASS}
+
+  dashboard:
+    build: 
+      context: .
+      dockerfile: ./dashboard/php/Dockerfile
+    volumes:
+      - type: bind
+        source: ./dashboard/laravel
+        target: /laravel-application/dashboard/laravel
+    environment:
+      - DB_CONNECTION=${DB_CONNECTION}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_NAME}
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASS}
+
+  database:
+    build: 
+      context: .
+      dockerfile: ./mysql/Dockerfile
+    ports:
+      - target: 3333
+        published: ${DB_PORT}
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: volume
+        source: database-store
+        target: /var/lib/mysql
+        volume:
+          nocopy: true
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+
+volumes:
+  database-store:
+  pma-session-store:
