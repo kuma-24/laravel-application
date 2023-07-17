@@ -57,7 +57,7 @@ services:
       context: .
       dockerfile: ./mysql/Dockerfile
     ports:
-      - target: 3333
+      - target: 3306
         published: ${DB_PORT}
         protocol: tcp
         mode: host
