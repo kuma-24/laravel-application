@@ -22,7 +22,7 @@ try {
 </head>
 
 <body>
-  <h1>MySQL接続確認:dashboard</h1>
+  <h1>MySQL接続確認:dashboardeee</h1>
   <p><?php echo $msg; ?></p>
 </body>
 
