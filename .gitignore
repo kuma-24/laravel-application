@@ -1,3 +1,4 @@
 /.env
+/ER.dio
 /nginx/default.conf
 /docker-compose.yml
