@@ -41,4 +41,9 @@ class Administrator extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function administrator_account()
+    {
+        return $this->hasOne(AdministratorAccount::class);
+    }
 }

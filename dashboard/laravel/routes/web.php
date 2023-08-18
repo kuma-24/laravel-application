@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdministratorController;
+use App\Http\Controllers\AdministratorAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::group(['prefix' => 'administrator'], function () {
+        Route::post('register_authorization', [AdministratorController::class, 'registerAuthorizationFlag'])->name('set-flag');
+        Route::get('index', [AdministratorController::class, 'index'])->name('administrator.index');
+    });
+    Route::get('/administrator/index/show/{id}', [AdministratorController::class, 'show'])->name('administrator.show');
+    Route::get('/account/profile', [AdministratorAccountController::class, 'profile'])->name('account.profile');
+    Route::get('/account/profile/edit', [AdministratorAccountController::class, 'edit'])->name('profile.edit');
 });
