@@ -10,5 +10,6 @@
         <a href="{{ route('profile.edit') }}">マイページ編集</a>
         <p>firstName: {{ $profiles->first_name }}</p>
         <p>barth-date: {{ $profiles->date_of_birth }}</p>
+        <a href="{{ route('dashboard') }}">戻る</a>
     </body>
 </html>

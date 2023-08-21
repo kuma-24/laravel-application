@@ -30,6 +30,7 @@
             <dd><input type="email" name="email" value="{{ $profiles->administrator->email }}"></dd>
         
         <button type="submit">Save Changes</button>
+        <a href="{{ route('account.profile') }}">キャンセル</a>
     </form>
     </body>
 </html>
