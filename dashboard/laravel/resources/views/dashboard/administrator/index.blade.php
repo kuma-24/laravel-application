@@ -14,5 +14,6 @@
         @foreach($administrators as $administrator)
             <li><a href="{{ route('administrator.show', $administrator->id) }}">{{ $administrator->email }}</a></li>
         @endforeach
+        <a href="{{ route('dashboard') }}">戻る</a>
     </body>
 </html>

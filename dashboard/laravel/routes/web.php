@@ -17,12 +17,12 @@ use App\Http\Controllers\AdministratorAccountController;
 */
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::group(['prefix' => 'administrator'], function () {
-        Route::post('register_authorization', [AdministratorController::class, 'registerAuthorizationFlag'])->name('set-flag');
         Route::get('index', [AdministratorController::class, 'index'])->name('administrator.index');
+        Route::get('index/show/{id}', [AdministratorController::class, 'show'])->name('administrator.show');
+        Route::post('register_authorization', [AdministratorController::class, 'registerAuthorizationFlag'])->name('set-flag');
     });
-    Route::get('/administrator/index/show/{id}', [AdministratorController::class, 'show'])->name('administrator.show');
     Route::get('/account/profile', [AdministratorAccountController::class, 'profile'])->name('account.profile');
     Route::get('/account/profile/edit', [AdministratorAccountController::class, 'edit'])->name('profile.edit');
 });

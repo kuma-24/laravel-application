@@ -8,5 +8,6 @@
     </head>
     <body>
         <p>firstName: {{ $administrator->administrator_account->first_name }}</p>
+        <a href="{{ route('administrator.index') }}">戻る</a>
     </body>
 </html>
