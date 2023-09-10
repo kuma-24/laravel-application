@@ -8,6 +8,7 @@
 </head>
 <body>
     <a href="{{ route('administrator.index') }}">管理者管理</a>
+    <a href="{{ route('campaign.index') }}">キャンペーン管理</a>
     <a href="{{ route('account.profile') }}">マイページ</a>
     <form method="post" action="{{ route('logout') }}">
         @csrf 
