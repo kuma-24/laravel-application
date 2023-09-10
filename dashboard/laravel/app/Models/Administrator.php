@@ -46,4 +46,9 @@ class Administrator extends Authenticatable
     {
         return $this->hasOne(AdministratorAccount::class);
     }
+
+    public function campaign()
+    {
+        return $this->hasMany(Campaign::class);
+    }
 }
